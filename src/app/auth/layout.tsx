@@ -7,9 +7,9 @@ import Image from 'next/image';
 import React, { ReactNode, useContext, useEffect } from 'react';
 
 const AuthLayout = ({
-	children
+  children
 }: {
-	children: ReactNode
+  children: ReactNode
 }) => {
   const { authPageImg } = useContext(AuthContext);
 
@@ -17,46 +17,53 @@ const AuthLayout = ({
     console.log(authPageImg);
   })
 
-	return (
-		<>
-			<Box 
-        display='flex' 
+  return (
+    <>
+      <Box
+        display='flex'
         width='100%'
         height='100vh'
+        justifyContent={{ xs: 'flex-start', sm: 'flex-start' }}
+        flexDirection={{ xs: 'column-reverse', sm: 'column-reverse', md: 'row' }}
+        overflow={{ xs: 'auto', sm: 'auto', md: 'hidden' }}
         sx={{
           backgroundColor: 'background.default',
         }}
         color='primary.main'
       >
-				<Box
+        <Box
           className='auth-form'
-					sx={{
-            marginInline: '10%',
-            marginBlock: 'auto',
-						width: '35%',
-					}}
-				>
-					{children}
-				</Box>
-				<Box
+          display="flex"
+          alignItems="center"
+          flexDirection="column"
+          justifyContent="center"
+          padding={{ xs: '40px', sm: '40px', md: '60px' }}
+          width={{ xs: '100%', sm: '100%', md: '35%' }}
+
+        >
+          {children}
+        </Box>
+        <Box
           className='auth-bkg-img'
           component='img'
           src={authPageImg}
-          width='65%'
-          style={{objectFit: 'cover'}}
+          maxHeight={{ xs: '400px', sm: '400px', md: '100%' }}
+          height={{ xs: '35%', sm: '45%', md: '100%' }}
+          width={{ xs: '100%', sm: '100%', md: '65%' }}
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
         ></Box>
         <Box
           className='auth-logo-npv'
           component={'img'}
           src='https://plataforma-cf.s3.sa-east-1.amazonaws.com/90232cb9-7363-4f41-8c12-c8cd3170884e.png'
           position='absolute'
-          top='5vh'
-          right='5vw'
+          top={{ xs: '13vh', sm: '13vh', md: '5vh' }}
+          right={{ xs: '40vw', sm: '40vw', md: '5vw' }}
           width='100px'
         />
-			</Box>
-		</>
-	);
+      </Box>
+    </>
+  );
 };
 
 export default AuthLayout;

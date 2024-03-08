@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+
 import './globals.css';
 import { AuthContextProvider } from '@/contexts/authContext';
 // import ThemeRegistry from '../ultils/themeRegistry';
 import { ThemeProvider } from '@mui/material';
 import { theme } from '@/ultils/theme';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { kanit, teko } from '@/ultils/fonts';
 
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -21,13 +23,15 @@ export default function RootLayout({
 	return (
 		<AuthContextProvider>
 			<html lang="en">
-				<body className={inter.className}>
+				<body className={`${kanit.className} ${teko.className}`}>
 					<ThemeProvider
 						theme={theme}
 					>
 						{children}
 					</ThemeProvider>
+					<ToastContainer />
 				</body>
+
 			</html>
 		</AuthContextProvider>
 	);

@@ -44,7 +44,7 @@ export default function LoginPg() {
       <Typography className={teko.className} fontSize={60} sx={{ lineHeight: "60px" }} fontWeight={600}>
         ACESSAR A PLATAFORMA
       </Typography>
-      <FormControl onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%', gap: '20px' }}>
+      <FormControl component="form" onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%', gap: '20px' }}>
         <TextField
           {...register("email", { required: true })}
           error={errors?.email ? true : false}

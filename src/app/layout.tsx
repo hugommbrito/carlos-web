@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-
+import CssBaseline from '@mui/material/CssBaseline';
 import './globals.css';
 import { AuthContextProvider } from '@/contexts/authContext';
 // import ThemeRegistry from '../ultils/themeRegistry';
@@ -8,7 +8,6 @@ import { theme } from '@/ultils/theme';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { kanit, teko } from '@/ultils/fonts';
-
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -24,12 +23,13 @@ export default function RootLayout({
 		<AuthContextProvider>
 			<html lang="en">
 				<body className={`${kanit.className} ${teko.className}`}>
+					<CssBaseline />
 					<ThemeProvider
 						theme={theme}
 					>
 						{children}
 					</ThemeProvider>
-					<ToastContainer />
+					{/* <ToastContainer /> */}
 				</body>
 
 			</html>

@@ -14,7 +14,7 @@ const AuthLayout = ({
   const { authPageImg } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log(authPageImg);
+    // console.log(authPageImg);
   })
 
   return (

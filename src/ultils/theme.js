@@ -17,4 +17,14 @@ export const theme = createTheme({
     //   default: "#EDEDED"
     // }
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+
+        root: {
+          backgroundColor: '#1D1E1E',
+        },
+      }
+    }
+  }
 }); 

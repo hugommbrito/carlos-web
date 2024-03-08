@@ -41,7 +41,7 @@ export default function LoginPg() {
 
   return (
     <>
-      <Typography className={teko.className} fontSize={60} sx={{ lineHeight: "60px" }} fontWeight={600}>
+      <Typography width={'100%'} className={teko.className} fontSize={{ xs: '40px', sm: '40px', md: '40px', lg: '60px' }} sx={{ lineHeight: "60px" }} fontWeight={600}>
         ACESSAR A PLATAFORMA
       </Typography>
       <FormControl component="form" onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%', gap: '20px' }}>
@@ -104,7 +104,7 @@ export default function LoginPg() {
             '& :hover': {
               backgroundColor: '#1D1E1E',
             },
-            padding: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '50px', fontSize: '24px'
+            padding: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', height: '50px', fontSize: '20px'
           }}
           type="submit" disabled={!isDirty || !isValid || isSubmitting}
         >ENTRAR!</Button>

@@ -12,10 +12,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { RegisterSchema } from "@/schemas/auth.schemas";
 import { useRouter } from 'next/navigation';
+
 type FormData = z.infer<typeof RegisterSchema>;
 
 export default function LoginPg() {
-  const { setAuthPageImg } = useContext(AuthContext);
+  const { setAuthPageImg, postUser } = useContext(AuthContext);
   const imgAddress = 'https://plataforma-cf.s3.sa-east-1.amazonaws.com/db9b0174-277d-4479-9231-340f202746e1.jpg'
 
   const [showPassword, setShowPassword] = useState(false);
@@ -33,6 +34,7 @@ export default function LoginPg() {
   async function onSubmit(data: FormData) {
     console.log(isSubmitting);
     console.log(data);
+    return await postUser(data)
   }
 
   useEffect(() => {
@@ -54,29 +56,29 @@ export default function LoginPg() {
         >
           <TextField
             sx={{ width: '49%' }}
-            {...register("nome", { required: true })}
-            error={errors?.nome ? true : false}
+            {...register("name", { required: true })}
+            error={errors?.name ? true : false}
             variant="outlined"
             className={kanit.className}
             label='Nome'
           />
-          {errors?.nome && (
+          {errors?.name && (
             <p className="text-red-600 text-sm">
-              {errors?.nome?.message}
+              {errors?.name?.message}
             </p>
           )}
           <TextField
 
             sx={{ width: '49%' }}
-            {...register("sobrenome", { required: true })}
-            error={errors?.sobrenome ? true : false}
+            {...register("surname", { required: true })}
+            error={errors?.surname ? true : false}
             variant="outlined"
             className={kanit.className}
             label='Sobrenome'
           />
-          {errors?.sobrenome && (
+          {errors?.surname && (
             <p className="text-red-600 text-sm">
-              {errors?.sobrenome?.message}
+              {errors?.surname?.message}
             </p>
           )}
         </Box>
@@ -90,6 +92,20 @@ export default function LoginPg() {
         {errors?.email && (
           <p className="text-red-600 text-sm">
             {errors?.email?.message}
+          </p>
+        )}
+        <TextField
+          {...register("birthdate", { required: true })}
+          error={errors?.birthdate ? true : false}
+          variant="outlined"
+          type="date"
+          className={kanit.className}
+          placeholder=""
+        // label='Data de aniversario'
+        />
+        {errors?.birthdate && (
+          <p className="text-red-600 text-sm">
+            {errors?.birthdate?.message}
           </p>
         )}
         <Box
@@ -145,7 +161,7 @@ export default function LoginPg() {
               ),
             }}
             variant="outlined"
-            type={showPasswordConfirm ? 'text' : 'confirmPassword'} // Adicione esta linha para alternar entre texto e senha
+            type={showPasswordConfirm ? 'text' : 'password'} // Adicione esta linha para alternar entre texto e senha
             label='Confirmar senha' />
           {errors?.confirmPassword && (
             <p className="text-red-600 text-sm">

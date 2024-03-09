@@ -22,9 +22,10 @@ export const LoginSchema = z.object({
 })
 
 export const RegisterSchema = z.object({
-    nome: z.string().min(3, {message: 'O nome deve ter pelo menos 3 caracteres!'}),
-    sobrenome: z.string().min(3, {message: 'O sobrenome deve ter pelo menos 3 caracteres!'}),
+    name: z.string().min(3, {message: 'O nome deve ter pelo menos 3 caracteres!'}),
+    surname: z.string().min(3, {message: 'O sobrenome deve ter pelo menos 3 caracteres!'}),
     email: z.string().email({message: 'E-mail inválido!'}),
+    birthdate: z.string(),
     password: z.string().regex(
         /^(?=.*?[A-Z])/,
         { message:'Deve conter pelo menos uma letra maiúscula.' }
@@ -57,6 +58,7 @@ export const RegisterSchema = z.object({
         /^.{8,}$/,
         { message:'Deve ter pelo menos 8 caracteres.' }
     ),
+    role: z.enum(['user', 'admin']).default('user'),
 }).superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
       ctx.addIssue({

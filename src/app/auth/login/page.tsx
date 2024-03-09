@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation';
 type FormData = z.infer<typeof LoginSchema>;
 
 export default function LoginPg() {
-  const { setAuthPageImg } = useContext(AuthContext);
+  const { setAuthPageImg, loginUser } = useContext(AuthContext);
   const imgAddress = 'https://plataforma-cf.s3.sa-east-1.amazonaws.com/c012145b-0cfa-4abe-b243-c6d8b4c19fd2.jpg'
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
@@ -33,6 +33,7 @@ export default function LoginPg() {
   async function onSubmit(data: FormData) {
     console.log(isSubmitting);
     console.log(data);
+    return await loginUser(data)
   }
 
   useEffect(() => {

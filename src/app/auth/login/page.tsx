@@ -12,13 +12,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
+import { useRouter } from 'next/navigation';
 type FormData = z.infer<typeof LoginSchema>;
 
 export default function LoginPg() {
   const { setAuthPageImg } = useContext(AuthContext);
   const imgAddress = 'https://plataforma-cf.s3.sa-east-1.amazonaws.com/c012145b-0cfa-4abe-b243-c6d8b4c19fd2.jpg'
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
   const {
     handleSubmit,
     register,
@@ -84,8 +86,8 @@ export default function LoginPg() {
             {errors?.password?.message}
           </p>
         )}
-        <Typography fontSize={14} fontWeight={300}>
-          <Link underline="none" className={kanit.className} href="">
+        <Typography sx={{ cursor: 'pointer' }} fontSize={14} fontWeight={300}>
+          <Link onClick={() => router.push('/auth/password/recovery')} underline="none" className={kanit.className}>
             Esqueci minha senha!
           </Link>
         </Typography>
@@ -108,8 +110,8 @@ export default function LoginPg() {
           }}
           type="submit" disabled={!isDirty || !isValid || isSubmitting}
         >ENTRAR!</Button>
-        <Typography className={kanit.className} fontSize={14} fontWeight={300}>
-          <Link underline="none" className={kanit.className} href="">
+        <Typography sx={{ cursor: 'pointer' }} className={kanit.className} fontSize={14} fontWeight={300}>
+          <Link underline="none" className={kanit.className} onClick={() => router.push('/auth/register')}>
             Criar minha conta
           </Link>
         </Typography>

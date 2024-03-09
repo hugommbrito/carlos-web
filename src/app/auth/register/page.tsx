@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { RegisterSchema } from "@/schemas/auth.schemas";
-
+import { useRouter } from 'next/navigation';
 type FormData = z.infer<typeof RegisterSchema>;
 
 export default function LoginPg() {
@@ -20,7 +20,7 @@ export default function LoginPg() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -173,8 +173,8 @@ export default function LoginPg() {
           }}
           type="submit" disabled={!isDirty || !isValid || isSubmitting}
         >Cadastre-se!</Button>
-        <Typography className={kanit.className} fontSize={14} fontWeight={300}>
-          <Link underline="none" className={kanit.className} href="">
+        <Typography sx={{ cursor: 'pointer' }} className={kanit.className} fontSize={14} fontWeight={300}>
+          <Link underline="none" className={kanit.className} onClick={() => router.push('/auth/login')}>
             Já tenho conta!
           </Link>
         </Typography>

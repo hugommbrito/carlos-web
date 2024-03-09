@@ -10,12 +10,14 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useRouter } from 'next/navigation';
+
 type FormData = z.infer<typeof emailRecoverySchema>;
 
 export default function LoginPg() {
   const { setAuthPageImg } = useContext(AuthContext);
   const imgAddress = 'https://plataforma-cf.s3.sa-east-1.amazonaws.com/24bfd9d0-5e3d-4b90-8914-b283d5b58da4.jpg'
-
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -79,8 +81,8 @@ export default function LoginPg() {
           }}
           type="submit" disabled={!isDirty || !isValid || isSubmitting}
         >Solicitar mudança</Button>
-        <Typography className={kanit.className} fontSize={14} fontWeight={300}>
-          <Link underline="none" className={kanit.className} href="">
+        <Typography sx={{ cursor: 'pointer' }} className={kanit.className} fontSize={14} fontWeight={300}>
+          <Link underline="none" className={kanit.className} onClick={() => router.push('/auth/login')}>
             Voltar
           </Link>
         </Typography>

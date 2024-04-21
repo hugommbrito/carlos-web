@@ -1,9 +1,10 @@
 'use client'
-import HeaderDesktop from '@/components/header/HeaderDesktop';
-import HeaderMobile from '@/components/header/HeaderMobile';
+
 import MainHeader from '@/components/header/MainHeader';
+import Marquee from '@/components/marquee/Marquee';
+
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from "react";
+
 
 
 
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <MainHeader />
+      <Marquee />
     </>
   )
 }

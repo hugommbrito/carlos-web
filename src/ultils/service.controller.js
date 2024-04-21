@@ -32,4 +32,5 @@ class AxiosController {
 // Usage example:
 const baseURL = 'https://localhost:3333';
 export const axiosController = new AxiosController(baseURL);
+console.log(axiosController);
 // const responseData = await axiosController.get('/data');

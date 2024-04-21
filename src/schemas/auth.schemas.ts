@@ -57,7 +57,7 @@ export const RegisterSchema = z.object({
     ).regex(
         /^.{8,}$/,
         { message:'Deve ter pelo menos 8 caracteres.' }
-    ),
+    ).optional(),
     role: z.enum(['user', 'admin']).default('user'),
 }).superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
@@ -66,7 +66,12 @@ export const RegisterSchema = z.object({
         message: "As senhas não são iguais!"
       });
     }
-  });
+  }).transform((data) => {
+    console.log(data)
+    delete data.confirmPassword
+    return data
+  })
+
 
 export const emailRecoverySchema = z.object({
     email: z.string().email({message: 'E-mail inválido!'})
@@ -113,3 +118,4 @@ export const passwordMatchsSchema = z.object({
       });
     }
   });
+  

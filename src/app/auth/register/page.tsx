@@ -32,9 +32,13 @@ export default function LoginPg() {
 
 
   async function onSubmit(data: FormData) {
-    console.log(isSubmitting);
-    console.log(data);
-    return await postUser(data)
+    const res = await postUser(data)
+    if (res) {
+      router.push('/auth/login')
+    } else {
+      //add toast error
+    }
+
   }
 
   useEffect(() => {

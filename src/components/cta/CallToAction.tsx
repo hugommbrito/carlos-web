@@ -6,8 +6,11 @@ export const CallToAction = () => {
         <Box
             height={{ xs: '250px', sm: '250px', md: '400px', lg: '400px' }}
             sx={{
-                width: '100%', paddingX: '12px', paddingY: '32px', backgroundColor: '#EDEDED',
-                display: 'flex', gap: '12px', '@media (max-width:900px)': {
+                width: '100%', paddingX: '12px', paddingY: '32px', backgroundColor: '#EDEDED', '& > :first-of-type': { // Target the first card by default
+                    width: '700px',
+                },
+                display: 'flex', gap: '12px',
+                '@media (max-width:900px)': {
 
                     overflowX: 'scroll',
                 }
@@ -21,7 +24,10 @@ export const CallToAction = () => {
                 sx={{
                     height: '100%', minWidth: '150px', position: 'relative',
                     transition: 'min-width 0.3s ease, width 0.3s ease', // Transição suave para mudança de largura
+
+
                     '@media (hover: hover) and (pointer: fine)': { // Aplica o efeito de hover apenas em dispositivos com suporte a hover
+
                         '&:hover': {
                             width: '700px', // Largura do Card no hover
                             minWidth: '700px',

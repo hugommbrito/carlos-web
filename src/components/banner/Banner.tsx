@@ -10,7 +10,7 @@ export const Banner = () => {
             display='flex'
             width='100%'
             height='100%'
-            maxHeight={'600px'}
+
             minHeight={'180px'}
             flexDirection={'column'}
             bgcolor={'#EDEDED'}

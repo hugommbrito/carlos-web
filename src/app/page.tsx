@@ -8,6 +8,7 @@ import { CallToAction } from '@/components/cta/CallToAction';
 import { useRouter } from 'next/navigation';
 import TestimonialSection from '@/components/testimonials/Testimonials';
 import { Team } from '@/components/team/Team';
+import { Partners } from '@/components/partners/Partners';
 
 
 
@@ -23,6 +24,7 @@ export default function Home() {
       <CallToAction />
       <TestimonialSection />
       <Team />
+      <Partners />
     </>
   )
 }

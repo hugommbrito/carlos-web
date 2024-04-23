@@ -29,7 +29,7 @@ const navItems = [
 
 const HeaderDesktop: React.FC = () => {
     return (
-        <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"} width={"100vw"} height={"100px"} paddingX={"32px"} boxSizing={"border-box"} bgcolor={'#EDEDED'}>
+        <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"} width={"100%"} height={"100px"} paddingX={"32px"} boxSizing={"border-box"} bgcolor={'#EDEDED'}>
             <Box
                 className='auth-logo-npv'
                 component={'img'}

@@ -6,9 +6,13 @@ export const CallToAction = () => {
         <Box
             height={{ xs: '250px', sm: '250px', md: '400px', lg: '400px' }}
             sx={{
-                width: '100vw', paddingX: '12px', paddingY: '32px', backgroundColor: '#EDEDED',
-                display: 'flex', gap: '12px', overflowX: 'scroll',
+                width: '100%', paddingX: '12px', paddingY: '32px', backgroundColor: '#EDEDED',
+                display: 'flex', gap: '12px', '@media (max-width:900px)': {
+
+                    overflowX: 'scroll',
+                }
             }}
+
         >
             {/* Exemplo de Card */}
             <Card

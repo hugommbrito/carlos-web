@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import TestimonialSection from '@/components/testimonials/Testimonials';
 import { Team } from '@/components/team/Team';
 import { Partners } from '@/components/partners/Partners';
+import { Challenge } from '@/components/challenge/Challenge';
 
 
 
@@ -25,6 +26,7 @@ export default function Home() {
       <TestimonialSection />
       <Team />
       <Partners />
+      <Challenge />
     </>
   )
 }

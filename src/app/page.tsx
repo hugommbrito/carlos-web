@@ -10,6 +10,7 @@ import TestimonialSection from '@/components/testimonials/Testimonials';
 import { Team } from '@/components/team/Team';
 import { Partners } from '@/components/partners/Partners';
 import { Challenge } from '@/components/challenge/Challenge';
+import Footer from '@/components/footer/Footer';
 
 
 
@@ -27,6 +28,8 @@ export default function Home() {
       <Team />
       <Partners />
       <Challenge />
+
+      <Footer />
     </>
   )
 }

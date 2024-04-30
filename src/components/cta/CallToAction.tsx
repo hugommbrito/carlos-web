@@ -6,7 +6,7 @@ export const CallToAction = () => {
         <Box
             height={{ xs: '250px', sm: '250px', md: '400px', lg: '400px' }}
             sx={{
-                width: '100%', paddingX: '12px', paddingY: '32px', backgroundColor: '#EDEDED', '& > :first-of-type': { // Target the first card by default
+                width: '100%', paddingX: '12px', paddingY: '32px', backgroundColor: '#EDEDED', overflowX: 'scroll', '& > :first-of-type': { // Target the first card by default
                     width: '700px',
                 },
                 display: 'flex', gap: '12px',

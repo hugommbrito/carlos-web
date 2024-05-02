@@ -17,10 +17,11 @@ export const Partners = () => {
             minHeight={'180px'}
             display='flex'
             flexDirection={'row'}
-            padding={'32px'}
             justifyContent={'space-between'}
             bgcolor={'#EDEDED'}
             sx={{
+                padding: { xs: '16px', sm: '0' },
+                paddingY: { sm: '32px' },
                 '@media(max-width: 1150px)': {
                     flexDirection: 'column'
                 }
@@ -34,7 +35,7 @@ export const Partners = () => {
                 }}
             >
                 {parceiros.map((item, index) => (
-                    <Box bgcolor={'#DBDBDB'} sx={{ objectFit: 'contain', padding: '28px', borderRadius: '8px' }} key={index} component={'img'} width={200} height={100} src={item.logo} alt={item.nome} />
+                    <Box bgcolor={'#DBDBDB'} sx={{ objectFit: 'contain', padding: '28px', borderRadius: '8px' }} key={index} component={'img'} width={180} height={100} src={item.logo} alt={item.nome} />
                 ))}
             </Box>
             <PartnerText />

@@ -29,13 +29,16 @@ export const Banner = () => {
                     <Box
                         position='absolute'
                         top={'0'}
-                        right={'0'}
+                        left={'50%'}
+                        style={{ transform: 'translateX(-50%)' }}
                         width={'100%'}
                         height={'100%'}
+                        maxWidth={'1140px'}
                         display='flex'
                         justifyContent={'space-between'}
                         alignItems={'center'}
-                        padding={'32px'}
+
+                        component='div'
                     >
                         <Box
                             width={'50%'}

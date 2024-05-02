@@ -28,3 +28,21 @@ body {
     text-wrap: balance;
   }
 } */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #EDEDED !important;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1D1E1E !important;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0F0F0F !important;
+}

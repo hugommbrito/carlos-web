@@ -12,6 +12,8 @@ import { Partners } from '@/components/partners/Partners';
 import { Challenge } from '@/components/challenge/Challenge';
 import Footer from '@/components/footer/Footer';
 import { Instagram } from '@/components/instagramPosts/InstagramSection';
+import { Box } from '@mui/material';
+import { Consulting } from '@/components/consulting/Consulting';
 
 
 
@@ -21,17 +23,23 @@ export default function Home() {
 
   return (
     <>
-      <MainHeader />
+      <Box sx={{ width: '100%', margin: '0 auto', backgroundColor: '#EDEDED' }}>
 
-      <Marquee />
-      <Banner />
-      <CallToAction />
-      <TestimonialSection />
-      <Team />
-      <Partners />
-      <Challenge />
-      <Instagram />
-      <Footer />
+        <MainHeader />
+        <Marquee />
+        <Banner />
+        <Box sx={{ maxWidth: '1140px', width: '100%', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '20px' }} >
+
+          <CallToAction />
+          <TestimonialSection />
+          <Team />
+          <Partners />
+          <Challenge />
+          <Consulting />
+          <Instagram />
+        </Box>
+        <Footer />
+      </Box>
     </>
   )
 }

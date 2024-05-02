@@ -14,8 +14,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
     points,
 }) => {
     return (
-        <Box sx={{ minWidth: '300px', width: '33%', '@media (max-width:768px)': { ml: 0, width: '100%' } }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', p: 3, mx: 'auto', width: '100%', backgroundImage: 'url("/images/bgComments.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'left', '@media (max-width:768px)': { px: 2, mt: 2 } }}>
+        <Box sx={{ minWidth: '350px', padding: { xs: '16px', sm: '32px' }, width: '33%', '@media (max-width:768px)': { ml: 0, width: '100%' } }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', mx: 'auto', width: '100%', backgroundImage: 'url("/images/bgComments.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'left', '@media (max-width:768px)': { px: 2, mt: 2 } }}>
                 <Typography className={kanit.className} variant="body2" sx={{ color: 'text.secondary' }}>
                     {testimonial}
                 </Typography>

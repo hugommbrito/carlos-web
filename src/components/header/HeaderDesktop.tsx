@@ -30,34 +30,36 @@ const navItems = [
 const HeaderDesktop: React.FC = () => {
     return (
         <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"} width={"100%"} height={"100px"} paddingX={"32px"} boxSizing={"border-box"} bgcolor={'#EDEDED'}>
-            <Box
-                className='auth-logo-npv'
-                component={'img'}
-                src='/Logo.svg'
+            <Box display={"flex"} alignItems={"center"} flexDirection={"row"} justifyContent={"space-between"} sx={{ width: '100%', maxWidth: '1140px', margin: '0 auto' }}>
+                <Box
+                    className='auth-logo-npv'
+                    component={'img'}
+                    src='/Logo.svg'
 
-                width='100px'
-            />
+                    width='100px'
+                />
 
-            <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} gap={"10px"}>
-                {navItems.map((item) => (
-                    <NavItem key={item} label={item} />
-                ))}
+                <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} gap={"10px"}>
+                    {navItems.map((item) => (
+                        <NavItem key={item} label={item} />
+                    ))}
+                </Box>
+                <Button
+                    className={teko.className}
+                    sx={{
+                        color: '#EDEDED',
+                        background: '#1D1E1E',
+                        ":disabled": {
+                            backgroundColor: '#DBDBDB',
+                            color: '#1D1E1E',
+                        },
+                        '& :hover': {
+                            backgroundColor: '#1D1E1E',
+                        },
+                        padding: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: 'max-content', height: '50px', fontSize: '20px'
+                    }}
+                >ACESSAR A PLATAFORMA</Button>
             </Box>
-            <Button
-                className={teko.className}
-                sx={{
-                    color: '#EDEDED',
-                    background: '#1D1E1E',
-                    ":disabled": {
-                        backgroundColor: '#DBDBDB',
-                        color: '#1D1E1E',
-                    },
-                    '& :hover': {
-                        backgroundColor: '#1D1E1E',
-                    },
-                    padding: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: 'max-content', height: '50px', fontSize: '20px'
-                }}
-            >ACESSAR A PLATAFORMA</Button>
         </Box>
     );
 };

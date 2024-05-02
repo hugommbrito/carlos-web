@@ -37,19 +37,19 @@ const TitleChallenge = () => {
                         display: 'none'
                     }
                 }} component="div" className={teko.className}>challenges</Typography>
-                <Box sx={{
+                <Box style={{ transform: 'translateY(-50%)' }} sx={{
                     position: 'absolute',
-                    top: '30%',
+                    top: '50%',
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
                     flexWrap: 'wrap',
-                    '@media (max-width:1024px)': {
-                        top: '25%',
-                    },
-                    '@media (max-width:768px)': {
-                        top: '-50px',
-                    }
+                    // '@media (max-width:1024px)': {
+                    //     top: '15%',
+                    // },
+                    // '@media (max-width:768px)': {
+                    //     top: '-50px',
+                    // }
                 }}>
                     <Box sx={{
                         width: '100%',
@@ -124,7 +124,7 @@ export const Challenge = () => {
 
 
             <Box sx={{
-                width: { xs: '100%', sm: '50%' }, display: 'flex', flexDirection: 'row', gap: '10px', overflowX: 'auto', margin: '0 auto'
+                width: { xs: '100%', sm: '100%' }, display: 'flex', flexDirection: 'row', gap: '10px', overflowX: 'auto', margin: '0 auto', justifyContent: 'space-between'
             }}>
                 {arr.map(item => <CardChallenge key={item} />)}
             </Box>

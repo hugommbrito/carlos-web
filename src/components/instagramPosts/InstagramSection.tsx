@@ -2,17 +2,17 @@ import { kanit, teko } from '@/ultils/fonts';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 
-
 const TitleInstagram = () => {
     return (
         <Box sx={{
             width: '100%',
-            height: 'max-content',
+            height: '150px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             gap: 2
+
         }}>
             <Box sx={{
                 position: 'relative',
@@ -37,16 +37,14 @@ const TitleInstagram = () => {
                         display: 'none'
                     }
                 }} component="div" className={teko.className}>FOLLOW</Typography>
-                <Box sx={{
+                <Box style={{ transform: 'translateY(-50%)' }} sx={{
                     position: 'absolute',
-                    top: '30%',
+                    top: '50%',
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
                     flexWrap: 'wrap',
-                    '@media (max-width:1024px)': {
-                        top: '25%',
-                    }
+
                 }}>
                     <Box sx={{
                         width: '100%',
@@ -94,6 +92,15 @@ const TitleInstagram = () => {
 
     )
 }
+// Simulando um componente de post do Instagram
+const InstagramPost = () => {
+    return (
+        <Box sx={{ width: '100%', minHeight: '100px', backgroundColor: '#FFF', margin: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {/* Conteúdo do post */}
+            <Typography>Post </Typography>
+        </Box>
+    );
+}
 
 export const Instagram = () => {
     let arr = [1, 2, 3]
@@ -101,11 +108,10 @@ export const Instagram = () => {
         <Box sx={{ width: '100%', minHeight: '200px', padding: '16px', backgroundColor: '#EDEDED', display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <TitleInstagram />
 
-
             <Box sx={{
                 width: { xs: '100%', sm: '50%' }, display: 'flex', flexDirection: 'row', gap: '10px', overflowX: 'auto', margin: '0 auto'
             }}>
-
+                {arr.map(item => <InstagramPost key={item} />)}
             </Box>
 
         </Box>

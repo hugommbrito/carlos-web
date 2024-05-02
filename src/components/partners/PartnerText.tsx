@@ -43,6 +43,7 @@ const PartnerText: React.FC = () => {
                 lineHeight: '98px',
                 width: 'max-content',
                 // maxWidth: '305px',
+                paddingX: '16px',
                 '@media(max-width: 1150px)': {
                     width: '100%',
                 }

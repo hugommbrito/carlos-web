@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.15.12",
     "@mui/material": "^5.15.12",
     "axios": "^1.6.7",
+    "instagram-web-api": "^2.2.2",
     "next": "14.1.0",
     "node": "^21.6.1",
     "react": "^18",

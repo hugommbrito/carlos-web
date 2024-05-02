@@ -11,6 +11,7 @@ import { Team } from '@/components/team/Team';
 import { Partners } from '@/components/partners/Partners';
 import { Challenge } from '@/components/challenge/Challenge';
 import Footer from '@/components/footer/Footer';
+import { Instagram } from '@/components/instagramPosts/InstagramSection';
 
 
 
@@ -21,6 +22,7 @@ export default function Home() {
   return (
     <>
       <MainHeader />
+
       <Marquee />
       <Banner />
       <CallToAction />
@@ -28,7 +30,7 @@ export default function Home() {
       <Team />
       <Partners />
       <Challenge />
-
+      <Instagram />
       <Footer />
     </>
   )

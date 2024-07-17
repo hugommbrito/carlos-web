@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { ReactElement } from "react";
 import { teko } from "@/ultils/fonts";
 const cupomStyle = {
   width: "100%",
@@ -9,7 +9,12 @@ const cupomStyle = {
   backgroundColor: "#CCFD5D",
   position: "relative",
 };
-const CupomContent = () => {
+
+interface CupomProps {
+  insideText: string
+}
+
+const CupomContent: React.FC<CupomProps> = ({insideText}) => {
   return (
     <React.Fragment>
       <Typography
@@ -26,17 +31,20 @@ const CupomContent = () => {
           textAlign: "center",
         }}
       >
-        NETSHOES COM DESCONTO ESPECIAL NESTE FIM DE SEMANA, USE O CUPOM
-        CARLOSFERREIRA
+        {insideText}
+        
       </Typography>
     </React.Fragment>
   );
 };
-export const CupomBanner = () => {
+
+interface BannerProps extends CupomProps {}
+
+export const CupomBanner: React.FC<BannerProps> = ({insideText}) => {
   return (
     <Box sx={cupomStyle}>
       <Box>
-        <CupomContent />{" "}
+        <CupomContent insideText={insideText.toUpperCase()}/>
       </Box>
     </Box>
   );

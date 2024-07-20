@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 import { teko } from "@/ultils/fonts";
 const cupomStyle = {
   width: "100%",
+  hight: "48px",
   overflow: "hidden",
   boxSizing: "border-box",
   padding: "0.5rem",

@@ -1,19 +1,19 @@
 'use client'
 
 import { Banner } from '@/components/banner/Banner';
+import { CallToAction } from '@/components/cta/CallToAction';
 import MainHeader from '@/components/header/MainHeader';
 import Marquee from '@/components/marquee/Marquee';
-import { CallToAction } from '@/components/cta/CallToAction';
 
-import { useRouter } from 'next/navigation';
-import TestimonialSection from '@/components/testimonials/Testimonials';
-import { Team } from '@/components/team/Team';
-import { Partners } from '@/components/partners/Partners';
 import { Challenge } from '@/components/challenge/Challenge';
+import { Consulting } from '@/components/consulting/Consulting';
 import Footer from '@/components/footer/Footer';
 import { Instagram } from '@/components/instagramPosts/InstagramSection';
+import { Partners } from '@/components/partners/Partners';
+import { Team } from '@/components/team/Team';
+import TestimonialSection from '@/components/testimonials/Testimonials';
 import { Box } from '@mui/material';
-import { Consulting } from '@/components/consulting/Consulting';
+import { useRouter } from 'next/navigation';
 
 
 

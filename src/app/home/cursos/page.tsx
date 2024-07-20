@@ -1,25 +1,40 @@
-'use client'
+'use client';
 
-import { CupomBanner } from '@/components/cupom/Cupom';
-
-import { Autocomplete, Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Divider, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
-import Image from 'next/image';
-import { useState } from 'react';
-import { Course, cursoBodybuilding } from '../../curso/mockDeCursos';
-import SearchIcon from '@mui/icons-material/Search';
-import { kanit, teko } from '@/ultils/fonts';
-import { ArrowForward, ArrowForwardIos, Home } from '@mui/icons-material';
 import { CardCF } from '@/components/card/Card';
+import { kanit } from '@/ultils/fonts';
+import { ArrowForward } from '@mui/icons-material';
+import SearchIcon from '@mui/icons-material/Search';
+import { Box, InputAdornment, TextField } from '@mui/material';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { Course, cursoBodybuilding } from '../../curso/mockDeCursos';
+import Script from 'next/script';
+import { BotaoYampi } from '@/components/card/botaoyampi';
 
 export default function CursoPg() {
 	const [courses, setCourses] = useState<Course[]>([cursoBodybuilding]);
 
 	const [searchShrink, setSearchShrink] = useState<boolean>(false);
 	const handleSearchShrink = (event: React.FocusEvent<HTMLInputElement>) => {
-		setSearchShrink(!searchShrink)
-	}
+		setSearchShrink(!searchShrink);
+	};
 
-	const images = ['/images/banner.png', '/Logo.svg', '/images/Carlos.png', '/images/Consulting.png', '/images/logoApp.png','/images/banner.png', '/Logo.svg', '/images/Carlos.png', '/images/Consulting.png', '/images/logoApp.png','/images/banner.png', '/Logo.svg', '/images/Carlos.png', '/images/Consulting.png', '/images/logoApp.png', ]
+	const images = [  // DELETAR DEPOIS DA INTEGRAÇÃO
+		'/images/banner.png',
+		'/Logo.svg',
+		'/images/Carlos.png',
+		'/images/Consulting.png',
+		'/images/logoApp.png',
+		'/images/banner.png',
+		'/Logo.svg',
+		'/images/Carlos.png',
+		'/images/Consulting.png',
+		'/images/logoApp.png',
+		'/images/banner.png',
+		'/Logo.svg',
+		'/images/Carlos.png',
+		'/images/Consulting.png',
+		'/images/logoApp.png',
+	];
 
 	return (
 		<>
@@ -29,12 +44,9 @@ export default function CursoPg() {
 				className={kanit.className}
 				onFocus={handleSearchShrink}
 				onBlur={handleSearchShrink}
-				
 				InputProps={{
-					startAdornment:(
-						<InputAdornment position='start' 
-							style={{ marginTop: '0'}}
-						>
+					startAdornment: (
+						<InputAdornment position="start" style={{ marginTop: '0' }}>
 							<SearchIcon />
 						</InputAdornment>
 					),
@@ -42,7 +54,7 @@ export default function CursoPg() {
 				InputLabelProps={{
 					className: kanit.className,
 					shrink: searchShrink,
-					style: { marginLeft: '30px' }
+					style: { marginLeft: '30px' },
 				}}
 				sx={{
 					width: '450px',
@@ -52,17 +64,11 @@ export default function CursoPg() {
 					border: 'none',
 					outline: 'none',
 					backgroundColor: 'secondary.main',
-					color: 'primary.light'
-
+					color: 'primary.light',
 				}}
-			>
-			</TextField>
-			<Box
-				display={'flex'}
-				flexWrap={'wrap'}
-				rowGap={8}
-
-			>
+			></TextField>
+			<Box id="conteudoPrincipal" display={'flex'} flexWrap={'wrap'} rowGap={8}>
+			{/* <Script strategy='afterInteractive' className="ymp-script" src="https://api.yampi.io/v2/treinador-carlos/public/buy-button/5FE1UPCNMG/js"></Script> */}
 				{courses[0].modules.map((module, index) => (
 					<CardCF 
 						key={index}
@@ -75,7 +81,6 @@ export default function CursoPg() {
 					/>
 				))}
 			</Box>
-
 		</>
 	);
 }

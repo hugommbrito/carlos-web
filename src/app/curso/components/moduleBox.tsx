@@ -21,14 +21,14 @@ const LectureBox: React.FC<LectureInfos> = ({ title, is_watched, onClickLecture,
 				position: 'relative',
 				width: '100%',
 				boxShadow: 
-        is_watched ?
-        "inset -10px -10px 40px -35px rgba(70, 156, 0, 0.75)":
-        "inset -10px -10px 40px -35px rgba(0,0,0,0.75)",
-        '&:hover': {
-          boxShadow: 
-          is_watched ?
-          "inset -20px -20px 50px -35px rgba(70, 156, 0, 0.75)":
-          "inset -20px -20px 50px -35px rgba(0,0,0,0.75)",
+					is_watched ?
+					"inset -10px -10px 40px -35px rgba(70, 156, 0, 0.75)":
+					"inset -10px -10px 40px -35px rgba(0,0,0,0.75)",
+					'&:hover': {
+						boxShadow: 
+						is_watched ?
+						"inset -20px -20px 50px -35px rgba(70, 156, 0, 0.75)":
+						"inset -20px -20px 50px -35px rgba(0,0,0,0.75)",
 
         },
 			}}

@@ -121,6 +121,7 @@ export default function CursoPg() {
           <Button
             variant='outlined'
             sx={{
+								backgroundColor: 'background.default',
                 position: 'fixed',
                 bottom: '20px',
                 right: '20px',

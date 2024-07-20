@@ -1,15 +1,19 @@
 import axios from "axios";
 
 class AxiosController {
-    constructor(baseURL) {
+    constructor(baseURL, ) {
         this.axiosInstance = axios.create({
-            baseURL: baseURL, headers: { 'Content-Type': 'application/json' },
+            baseURL: baseURL,
+            headers: { 
+                'Content-Type': 'application/json'
+            },
         });
     }
 
-    async get(url) {
+    async get(url, token) {
+
         try {
-            const response = await this.axiosInstance.get(url);
+            const response = await this.axiosInstance.get(url, {headers: {Authorization: 'Bearer ' + token}});
             return response.data;
         } catch (error) {
             console.error(error);
@@ -30,7 +34,7 @@ class AxiosController {
 }
 
 // Usage example:
-const baseURL = 'https://localhost:3333';
+const baseURL = 'http://localhost:3344';
 export const axiosController = new AxiosController(baseURL);
 console.log(axiosController);
 // const responseData = await axiosController.get('/data');

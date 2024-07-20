@@ -1,22 +1,23 @@
-'use client';
+'use client'
 
-import { CardCF } from '@/components/card/Card';
-import { kanit } from '@/ultils/fonts';
-import { ArrowForward } from '@mui/icons-material';
-import SearchIcon from '@mui/icons-material/Search';
-import { Box, InputAdornment, TextField } from '@mui/material';
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { Course, cursoBodybuilding } from '../../curso/mockDeCursos';
-import Script from 'next/script';
-import { BotaoYampi } from '@/components/card/botaoyampi';
+import { CardCF } from '@/components/card/Card'
+import { kanit } from '@/ultils/fonts'
+import { ArrowForward } from '@mui/icons-material'
+import SearchIcon from '@mui/icons-material/Search'
+import { Box, InputAdornment, TextField } from '@mui/material'
+import Script from 'next/script'
+import { useEffect, useState } from 'react'
+import { Course, cursoBodybuilding } from '../../curso/mockDeCursos'
+import { courseProvider } from '@/providers/mainApi/courses/course.provider'
+import { iCourse } from '@/providers/mainApi/courses/interfaces'
 
 export default function CursoPg() {
-	const [courses, setCourses] = useState<Course[]>([cursoBodybuilding]);
+	const [courses, setCourses] = useState<iCourse[]>([])
 
-	const [searchShrink, setSearchShrink] = useState<boolean>(false);
+	const [searchShrink, setSearchShrink] = useState<boolean>(false)
 	const handleSearchShrink = (event: React.FocusEvent<HTMLInputElement>) => {
-		setSearchShrink(!searchShrink);
-	};
+		setSearchShrink(!searchShrink)
+	}
 
 	const images = [  // DELETAR DEPOIS DA INTEGRAÇÃO
 		'/images/banner.png',
@@ -34,7 +35,20 @@ export default function CursoPg() {
 		'/images/Carlos.png',
 		'/images/Consulting.png',
 		'/images/logoApp.png',
-	];
+	]
+
+	useEffect(() => {
+		const fetchCourses = async () => {
+			const response = await courseProvider.getAllCourses("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZDcxYzk0Yi1mZjMwLTQ1OGEtYmZhOC0wOWFmOTEwMzAzNDEiLCJuYW1lIjoiQWRpbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMTQ0Mjc1NSwiZXhwIjoxNzIyMDQ3NTU1fQ.C_IEX8mvWg4bh_XGop73S59YfULPNaTBdeC73whOIU0")
+			console.log(response)
+			setCourses(response)
+		}
+		fetchCourses()
+
+		// console.log(courses);
+
+		return () => {}
+	})
 
 	return (
 		<>
@@ -69,18 +83,20 @@ export default function CursoPg() {
 			></TextField>
 			<Box id="conteudoPrincipal" display={'flex'} flexWrap={'wrap'} rowGap={8}>
 			{/* <Script strategy='afterInteractive' className="ymp-script" src="https://api.yampi.io/v2/treinador-carlos/public/buy-button/5FE1UPCNMG/js"></Script> */}
-				{courses[0].modules.map((module, index) => (
+				{courses.map((course, index) => {
+					console.log(course);
+					return (
 					<CardCF 
 						key={index}
-						title={module.lectures[0].name}
-						description={module.lectures[0].description}
+						title={course.name}
+						description={course.description}
 						image={images[index]}
 						buttonText={'acessar'}
 						buttonLink='/curso'
 						buttonIcon={<ArrowForward />}
 					/>
-				))}
+				)})}
 			</Box>
 		</>
-	);
+	)
 }

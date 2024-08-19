@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation';
 type FormData = z.infer<typeof RegisterSchema>;
 
 export default function LoginPg() {
-  const { setAuthPageImg, postUser } = useContext(AuthContext);
+  // const { setAuthPageImg, postUser } = useContext(AuthContext);
   const imgAddress = 'https://plataforma-cf.s3.sa-east-1.amazonaws.com/db9b0174-277d-4479-9231-340f202746e1.jpg'
 
   const [showPassword, setShowPassword] = useState(false);
@@ -31,18 +31,18 @@ export default function LoginPg() {
   });
 
 
-  async function onSubmit(data: FormData) {
-    const res = await postUser(data)
-    if (res) {
-      router.push('/auth/login')
-    } else {
-      //add toast error
-    }
+  // async function onSubmit(data: FormData) {
+  //   const res = await postUser(data)
+  //   if (res) {
+  //     router.push('/auth/login')
+  //   } else {
+  //     //add toast error
+  //   }
 
-  }
+  // }
 
   useEffect(() => {
-    setAuthPageImg(imgAddress)
+    // setAuthPageImg(imgAddress)
 
     return () => { }
   },)
@@ -52,7 +52,7 @@ export default function LoginPg() {
       <Typography width={'100%'} className={teko.className} fontSize={{ xs: '40px', sm: '40px', md: '40px', lg: '60px' }} sx={{ lineHeight: "60px" }} fontWeight={600}>
         CADASTRE-SE E ACESSE A PLATAFORMA
       </Typography>
-      <FormControl component="form" onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%', gap: '20px' }}>
+      {/* <FormControl component="form" onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%', gap: '20px' }}> */}
         <Box
           display={"flex"}
           flexDirection={"row"}
@@ -199,7 +199,7 @@ export default function LoginPg() {
           </Link>
         </Typography>
 
-      </FormControl >
+      {/* </FormControl > */}
       <Typography className={kanit.className} fontSize={14} fontWeight={300} sx={{ marginTop: '100px', width: '100%' }}>© Todos os direitos reservados!</Typography>
     </>
   )

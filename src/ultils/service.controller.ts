@@ -1,7 +1,9 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
+import { unknown } from "zod";
 
 class AxiosController {
-    constructor(baseURL, ) {
+    public axiosInstance: AxiosInstance
+    constructor(baseURL: string, ) {
         this.axiosInstance = axios.create({
             baseURL: baseURL,
             headers: { 
@@ -10,7 +12,7 @@ class AxiosController {
         });
     }
 
-    async get(url, token) {
+    async get(url: string, token: string) {
 
         try {
             const response = await this.axiosInstance.get(url, {headers: {Authorization: 'Bearer ' + token}});
@@ -21,20 +23,19 @@ class AxiosController {
         }
     }
 
-    async post(url, data) {
+    async post(url: string, data: any): Promise<AxiosResponse> {
         try {
             const response = await this.axiosInstance.post(url, data);
-            return response.data;
-        } catch (error) {
+            return response;
+        } catch (error: any) {
             console.error(error);
-            return null;
+            throw error as AxiosError;
+
         }
     }
 
 }
 
-// Usage example:
-const baseURL = 'http://localhost:3344';
+const baseURL = 'https://carlos-api-pi.vercel.app';
+// const baseURL = 'http://localhost:3344';
 export const axiosController = new AxiosController(baseURL);
-console.log(axiosController);
-// const responseData = await axiosController.get('/data');

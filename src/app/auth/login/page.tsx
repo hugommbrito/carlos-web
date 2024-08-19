@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/authContext";
-import { Button, FormControl, IconButton, Input, InputAdornment, Link, TextField, Typography } from "@mui/material";
+import { Alert, Button, FormControl, IconButton, Input, InputAdornment, LinearProgress, Link, Snackbar, TextField, Typography } from "@mui/material";
 import { LoginSchema } from "@/schemas/auth.schemas";
 import { ZodError } from "zod";
 import { kanit, teko } from '@/ultils/fonts';
@@ -13,13 +13,22 @@ import * as z from "zod";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useRouter } from 'next/navigation';
+import { AuthProvider } from "@/providers/mainApi/auth/auth.provider";
+import { AxiosError } from "axios";
 type FormData = z.infer<typeof LoginSchema>;
 
 export default function LoginPg() {
-  const { setAuthPageImg, loginUser } = useContext(AuthContext);
+  const { setAuthPageImg, checkSession, login } = useContext(AuthContext);
   const imgAddress = 'https://plataforma-cf.s3.sa-east-1.amazonaws.com/c012145b-0cfa-4abe-b243-c6d8b4c19fd2.jpg'
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+
+  //Snackbar and Alert states
+  const [openAlert, setOpenAlert] = useState(false)
+  const [AlertMessage, setAlertMessage] = useState('')
+  const [AlertSeverity, setAlertSeverity] = useState<'error' | 'success' | 'info' | 'warning'>('info')
+  const alertTimer = 3000
+
 
   const {
     handleSubmit,
@@ -30,17 +39,41 @@ export default function LoginPg() {
   });
 
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function onSubmit(data: FormData) {
-    console.log(isSubmitting);
-    console.log(data);
-    return await loginUser(data)
+    const response = await AuthProvider.login(data)
+
+    if(response instanceof AxiosError){
+      setAlertMessage(response.response!.data.description)
+      setAlertSeverity('error')
+      setOpenAlert(true)
+
+    } else {
+      console.log(response);
+      setAlertMessage(response.data.message)
+      setAlertSeverity('success')
+      setOpenAlert(true)
+      setTimeout(() => {
+        login(response.data.accessToken)
+      }, alertTimer)
+
+    }
+
+    
+  }
+
+  const handleAlertClose = () => {
+    setOpenAlert(false)
   }
 
   useEffect(() => {
+    if(checkSession()) router.push('/home/cursos')
     setAuthPageImg(imgAddress)
 
     return () => { }
-  },)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
 
   return (
     <>
@@ -119,6 +152,22 @@ export default function LoginPg() {
 
       </FormControl >
       <Typography className={kanit.className} fontSize={14} fontWeight={300} sx={{ marginTop: '100px', width: '100%' }}>© Todos os direitos reservados!</Typography>
+      <Snackbar 
+        open={openAlert}
+        autoHideDuration={alertTimer}
+        onClose={handleAlertClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+        >
+        <Alert
+          severity={AlertSeverity}
+          variant="filled"
+          onClose={handleAlertClose}
+        >
+          <Typography className={kanit.className} fontSize={14} fontWeight={300}>
+            {AlertMessage}
+          </Typography>
+        </Alert>
+      </Snackbar>
     </>
   )
 }

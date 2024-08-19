@@ -3,22 +3,23 @@ import { z } from "zod";
 
 export const LoginSchema = z.object({
     email: z.string().email({message: 'E-mail inválido!'}),
-    password: z.string().regex(
-        /^(?=.*?[A-Z])/,
-        { message:'Deve conter pelo menos uma letra maiúscula.' }
-    ).regex(
-        /^(?=.*?[a-z])/,
-        { message:'Deve conter pelo menos uma letra minúscula.' }
-    ).regex(
-        /^(?=.*?[0-9])/,
-        { message:'Deve conter pelo menos um número.' }
-    ).regex(
-        /^(?=.*?[#?!@$%^&*-])/,
-        { message:'Deve conter pelo menos um caractere especial.' }
-    ).regex(
-        /^.{8,}$/,
-        { message:'Deve ter pelo menos 8 caracteres.' }
-    )
+    password: z.string()
+    // .regex(
+    //     /^(?=.*?[A-Z])/,
+    //     { message:'Deve conter pelo menos uma letra maiúscula.' }
+    // ).regex(
+    //     /^(?=.*?[a-z])/,
+    //     { message:'Deve conter pelo menos uma letra minúscula.' }
+    // ).regex(
+    //     /^(?=.*?[0-9])/,
+    //     { message:'Deve conter pelo menos um número.' }
+    // ).regex(
+    //     /^(?=.*?[#?!@$%^&*-])/,
+    //     { message:'Deve conter pelo menos um caractere especial.' }
+    // ).regex(
+    //     /^.{6,}$/,
+    //     { message:'Deve ter pelo menos 6 caracteres.' }
+    // )
 })
 
 export const RegisterSchema = z.object({
@@ -39,8 +40,8 @@ export const RegisterSchema = z.object({
         /^(?=.*?[#?!@$%^&*-])/,
         { message:'Deve conter pelo menos um caractere especial.' }
     ).regex(
-        /^.{8,}$/,
-        { message:'Deve ter pelo menos 8 caracteres.' }
+        /^.{6,}$/,
+        { message:'Deve ter pelo menos 6 caracteres.' }
     ),
     confirmPassword: z.string().regex(
         /^(?=.*?[A-Z])/,
@@ -55,10 +56,11 @@ export const RegisterSchema = z.object({
         /^(?=.*?[#?!@$%^&*-])/,
         { message:'Deve conter pelo menos um caractere especial.' }
     ).regex(
-        /^.{8,}$/,
-        { message:'Deve ter pelo menos 8 caracteres.' }
+        /^.{6,}$/,
+        { message:'Deve ter pelo menos 6 caracteres.' }
     ).optional(),
-    role: z.enum(['user', 'admin']).default('user'),
+    role: z.enum(['user', 'admin', 'staff']).default('user').optional(),
+    adminPassword: z.string().optional()
 }).superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
       ctx.addIssue({
@@ -67,7 +69,6 @@ export const RegisterSchema = z.object({
       });
     }
   }).transform((data) => {
-    console.log(data)
     delete data.confirmPassword
     return data
   })
@@ -91,8 +92,8 @@ export const passwordMatchsSchema = z.object({
         /^(?=.*?[#?!@$%^&*-])/,
         { message:'Deve conter pelo menos um caractere especial.' }
     ).regex(
-        /^.{8,}$/,
-        { message:'Deve ter pelo menos 8 caracteres.' }
+        /^.{6,}$/,
+        { message:'Deve ter pelo menos 6 caracteres.' }
     ),
     confirmPassword: z.string().regex(
         /^(?=.*?[A-Z])/,
@@ -107,8 +108,8 @@ export const passwordMatchsSchema = z.object({
         /^(?=.*?[#?!@$%^&*-])/,
         { message:'Deve conter pelo menos um caractere especial.' }
     ).regex(
-        /^.{8,}$/,
-        { message:'Deve ter pelo menos 8 caracteres.' }
+        /^.{6,}$/,
+        { message:'Deve ter pelo menos 6 caracteres.' }
     ),
 }).superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {

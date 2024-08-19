@@ -45,8 +45,6 @@ export default function CursoPg() {
 		}
 		fetchCourses()
 
-		// console.log(courses);
-
 		return () => {}
 	})
 

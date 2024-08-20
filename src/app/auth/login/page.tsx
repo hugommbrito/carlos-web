@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/authContext";
-import { Alert, Button, FormControl, IconButton, Input, InputAdornment, LinearProgress, Link, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert, Button, CircularProgress, FormControl, IconButton, Input, InputAdornment, LinearProgress, Link, Snackbar, TextField, Typography } from "@mui/material";
 import { LoginSchema } from "@/schemas/auth.schemas";
 import { ZodError } from "zod";
 import { kanit, teko } from '@/ultils/fonts';
@@ -15,6 +15,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useRouter } from 'next/navigation';
 import { AuthProvider } from "@/providers/mainApi/auth/auth.provider";
 import { AxiosError } from "axios";
+import { ArrowForwardRounded } from "@mui/icons-material";
 type FormData = z.infer<typeof LoginSchema>;
 
 export default function LoginPg() {
@@ -128,7 +129,8 @@ export default function LoginPg() {
         <Button
 
           className={teko.className}
-          endIcon={<Image src="/Arrow.svg" alt="arrow-right" width={20} height={20} />}
+          // endIcon={<Image src="/Arrow.svg" alt="arrow-right" width={20} height={20} />}
+          endIcon={isSubmitting ? <CircularProgress /> : <ArrowForwardRounded />}
           sx={{
             color: '#CCFD5D',
 

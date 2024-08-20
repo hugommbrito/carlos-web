@@ -17,10 +17,11 @@ export interface iAuthContextProviderProps {
 
 export interface iSession {
   isLogged: boolean,
+  token: string | undefined,
   user: {
     sub: string,
     name: string,
-    role: 'admin' | 'user' | 'staff'
+    role: iRoles,
   } | undefined
 }
 
@@ -36,3 +37,5 @@ export interface iUserLogin{
   email: string,
   password: string
 }
+
+export type iRoles = 'admin' | 'user' | 'staff'

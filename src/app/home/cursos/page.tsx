@@ -6,18 +6,27 @@ import { ArrowForward } from '@mui/icons-material'
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, InputAdornment, TextField } from '@mui/material'
 import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Course, cursoBodybuilding } from '../../curso/mockDeCursos'
 import { courseProvider } from '@/providers/mainApi/courses/course.provider'
 import { iCourse } from '@/providers/mainApi/courses/interfaces'
+import { AuthContext } from '@/contexts/authContext'
+import { useRouter } from 'next/navigation'
+import { SnackbarAlertContext } from '@/contexts/snackbarAlertContext'
 
 export default function CursoPg() {
+	const router = useRouter()
+	const {checkSession, session} = useContext(AuthContext)
+	const {setIsOpenAlert, setAlertMessage, alertTimer} = useContext(SnackbarAlertContext)
+
 	const [courses, setCourses] = useState<iCourse[]>([])
 
 	const [searchShrink, setSearchShrink] = useState<boolean>(false)
 	const handleSearchShrink = (event: React.FocusEvent<HTMLInputElement>) => {
 		setSearchShrink(!searchShrink)
 	}
+
+
 
 	const images = [  // DELETAR DEPOIS DA INTEGRAÇÃO
 		'/images/banner.png',
@@ -39,11 +48,23 @@ export default function CursoPg() {
 
 	useEffect(() => {
 		const fetchCourses = async () => {
-			const response = await courseProvider.getAllCourses("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZDcxYzk0Yi1mZjMwLTQ1OGEtYmZhOC0wOWFmOTEwMzAzNDEiLCJuYW1lIjoiQWRpbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMTQ0Mjc1NSwiZXhwIjoxNzIyMDQ3NTU1fQ.C_IEX8mvWg4bh_XGop73S59YfULPNaTBdeC73whOIU0")
+			const response = await courseProvider.getAllCourses(session.token!)
 			console.log(response)
 			setCourses(response)
 		}
-		fetchCourses()
+
+		if(!checkSession()){
+			setIsOpenAlert(true)
+			setAlertMessage('Você precisa estar logado para acessar essa página')
+			setTimeout(() => {
+				router.replace('/auth/login')
+			}, alertTimer+1000)
+			
+		} else {
+			fetchCourses()
+
+		}
+
 
 		return () => {}
 	})

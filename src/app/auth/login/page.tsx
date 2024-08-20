@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import { AuthProvider } from "@/providers/mainApi/auth/auth.provider";
 import { AxiosError } from "axios";
 import { ArrowForwardRounded } from "@mui/icons-material";
+import { SnackbarAlertContext } from "@/contexts/snackbarAlertContext";
 type FormData = z.infer<typeof LoginSchema>;
 
 export default function LoginPg() {
@@ -24,11 +25,7 @@ export default function LoginPg() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  //Snackbar and Alert states
-  const [openAlert, setOpenAlert] = useState(false)
-  const [AlertMessage, setAlertMessage] = useState('')
-  const [AlertSeverity, setAlertSeverity] = useState<'error' | 'success' | 'info' | 'warning'>('info')
-  const alertTimer = 3000
+  const {setAlertMessage, AlertMessage, AlertSeverity, setAlertSeverity, alertTimer, isOpenAlert, setIsOpenAlert} = useContext(SnackbarAlertContext)
 
 
   const {
@@ -47,13 +44,13 @@ export default function LoginPg() {
     if(response instanceof AxiosError){
       setAlertMessage(response.response!.data.description)
       setAlertSeverity('error')
-      setOpenAlert(true)
+      setIsOpenAlert(true)
 
     } else {
       console.log(response);
       setAlertMessage(response.data.message)
       setAlertSeverity('success')
-      setOpenAlert(true)
+      setIsOpenAlert(true)
       setTimeout(() => {
         login(response.data.accessToken)
       }, alertTimer)
@@ -61,10 +58,6 @@ export default function LoginPg() {
     }
 
     
-  }
-
-  const handleAlertClose = () => {
-    setOpenAlert(false)
   }
 
   useEffect(() => {
@@ -154,22 +147,6 @@ export default function LoginPg() {
 
       </FormControl >
       <Typography className={kanit.className} fontSize={14} fontWeight={300} sx={{ marginTop: '100px', width: '100%' }}>© Todos os direitos reservados!</Typography>
-      <Snackbar 
-        open={openAlert}
-        autoHideDuration={alertTimer}
-        onClose={handleAlertClose}
-        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-        >
-        <Alert
-          severity={AlertSeverity}
-          variant="filled"
-          onClose={handleAlertClose}
-        >
-          <Typography className={kanit.className} fontSize={14} fontWeight={300}>
-            {AlertMessage}
-          </Typography>
-        </Alert>
-      </Snackbar>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import { createContext, useState } from "react"
 import { iSnackbarAlertContextValues } from "./types"
-import { Alert, Snackbar, Typography } from "@mui/material"
+import { Alert, LinearProgress, Snackbar, Typography } from "@mui/material"
 import { kanit } from "@/ultils/fonts"
 
 export const SnackbarAlertContext = createContext({} as iSnackbarAlertContextValues)
@@ -36,15 +36,22 @@ export const SnackbarAlertContextProvider = (
         autoHideDuration={alertTimer}
         onClose={handleAlertClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+        sx={{
+          overflow: "hidden",
+        }}
         >
         <Alert
           severity={AlertSeverity}
           variant="filled"
           onClose={handleAlertClose}
+          sx={{
+            overflow: "hidden",
+          }}
         >
-          <Typography className={kanit.className} fontSize={14} fontWeight={300}>
+          <Typography className={kanit.className} fontSize={14} fontWeight={300} sx={{overflow: "hidden",}}>
             {AlertMessage}
           </Typography>
+          <LinearProgress color={AlertSeverity} sx={{height: "2%", overflow: "hidden",}}/>
         </Alert>
       </Snackbar>
     </SnackbarAlertContext.Provider>

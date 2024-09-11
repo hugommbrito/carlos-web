@@ -12,11 +12,16 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { RegisterSchema } from "@/schemas/auth.schemas";
 import { useRouter } from 'next/navigation';
+import { UserProvider } from "@/providers/main-api/user/user.provider";
+import { AxiosError } from "axios";
+import { SnackbarAlertContext } from "@/contexts/snackbarAlertContext";
+import { red } from "@mui/material/colors";
 
 type FormData = z.infer<typeof RegisterSchema>;
 
 export default function LoginPg() {
-  // const { setAuthPageImg, postUser } = useContext(AuthContext);
+  const {setAlertMessage, setAlertSeverity, setIsOpenAlert, alertTimer} = useContext(SnackbarAlertContext)
+  const { setAuthPageImg } = useContext(AuthContext)
   const imgAddress = 'https://plataforma-cf.s3.sa-east-1.amazonaws.com/db9b0174-277d-4479-9231-340f202746e1.jpg'
 
   const [showPassword, setShowPassword] = useState(false);
@@ -28,21 +33,31 @@ export default function LoginPg() {
     formState: { errors, isSubmitting, isDirty, isValid },
   } = useForm<FormData>({
     resolver: zodResolver(RegisterSchema),
+    mode: 'onBlur',
   });
 
 
-  // async function onSubmit(data: FormData) {
-  //   const res = await postUser(data)
-  //   if (res) {
-  //     router.push('/auth/login')
-  //   } else {
-  //     //add toast error
-  //   }
+  async function onSubmit(data: FormData) {
+    const response = await UserProvider.register(data)
+    if (response instanceof AxiosError) {
+      setAlertMessage(response.response!.data.description)
+      setAlertSeverity('error')
+      setIsOpenAlert(true)
+    } else {
+      setAlertMessage(response.data.message)
+      setAlertSeverity('success')
+      setIsOpenAlert(true)
+      setTimeout(() => {
+        router.push('/auth/login')
+      }, alertTimer)
+    }
 
-  // }
+    return () => { }
+
+  }
 
   useEffect(() => {
-    // setAuthPageImg(imgAddress)
+    setAuthPageImg(imgAddress)
 
     return () => { }
   },)
@@ -52,7 +67,7 @@ export default function LoginPg() {
       <Typography width={'100%'} className={teko.className} fontSize={{ xs: '40px', sm: '40px', md: '40px', lg: '60px' }} sx={{ lineHeight: "60px" }} fontWeight={600}>
         CADASTRE-SE E ACESSE A PLATAFORMA
       </Typography>
-      {/* <FormControl component="form" onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%', gap: '20px' }}> */}
+      <FormControl component="form" onSubmit={handleSubmit(onSubmit)} sx={{ width: '100%', gap: '20px' }}>
         <Box
           display={"flex"}
           flexDirection={"row"}
@@ -61,16 +76,12 @@ export default function LoginPg() {
           <TextField
             sx={{ width: '49%' }}
             {...register("name", { required: true })}
-            error={errors?.name ? true : false}
+            error={errors.name ? true : false}
             variant="outlined"
             className={kanit.className}
             label='Nome'
           />
-          {errors?.name && (
-            <p className="text-red-600 text-sm">
-              {errors?.name?.message}
-            </p>
-          )}
+          
           <TextField
 
             sx={{ width: '49%' }}
@@ -80,11 +91,7 @@ export default function LoginPg() {
             className={kanit.className}
             label='Sobrenome'
           />
-          {errors?.surname && (
-            <p className="text-red-600 text-sm">
-              {errors?.surname?.message}
-            </p>
-          )}
+          
         </Box>
         <TextField
           {...register("email", { required: true })}
@@ -93,11 +100,7 @@ export default function LoginPg() {
           className={kanit.className}
           label='Email'
         />
-        {errors?.email && (
-          <p className="text-red-600 text-sm">
-            {errors?.email?.message}
-          </p>
-        )}
+        
         <TextField
           {...register("birthdate", { required: true })}
           error={errors?.birthdate ? true : false}
@@ -105,13 +108,9 @@ export default function LoginPg() {
           type="date"
           className={kanit.className}
           placeholder=""
-        // label='Data de aniversario'
+        // label='Data de nascimento'
         />
-        {errors?.birthdate && (
-          <p className="text-red-600 text-sm">
-            {errors?.birthdate?.message}
-          </p>
-        )}
+        
         <Box
           display={"flex"}
           flexDirection={"row"}
@@ -140,11 +139,7 @@ export default function LoginPg() {
             variant="outlined"
             type={showPassword ? 'text' : 'password'} // Adicione esta linha para alternar entre texto e senha
             label='Senha' />
-          {errors?.password && (
-            <p className="text-red-600 text-sm">
-              {errors?.password?.message}
-            </p>
-          )}
+          
           <TextField
 
             sx={{ width: '49%' }}
@@ -167,11 +162,7 @@ export default function LoginPg() {
             variant="outlined"
             type={showPasswordConfirm ? 'text' : 'password'} // Adicione esta linha para alternar entre texto e senha
             label='Confirmar senha' />
-          {errors?.confirmPassword && (
-            <p className="text-red-600 text-sm">
-              {errors?.confirmPassword?.message}
-            </p>
-          )}
+          
         </Box>
 
         <Button
@@ -193,13 +184,25 @@ export default function LoginPg() {
           }}
           type="submit" disabled={!isDirty || !isValid || isSubmitting}
         >Cadastre-se!</Button>
+        {Object.values(errors).map((error, index) => {
+          console.warn(error.message);
+          return(
+          <Typography
+            key={index}
+            color={red[700]}
+            lineHeight={0.5}
+          >
+            {error.message}
+          </Typography>
+          )})
+        }
         <Typography sx={{ cursor: 'pointer' }} className={kanit.className} fontSize={14} fontWeight={300}>
           <Link underline="none" className={kanit.className} onClick={() => router.push('/auth/login')}>
             Já tenho conta!
           </Link>
         </Typography>
 
-      {/* </FormControl > */}
+      </FormControl >
       <Typography className={kanit.className} fontSize={14} fontWeight={300} sx={{ marginTop: '100px', width: '100%' }}>© Todos os direitos reservados!</Typography>
     </>
   )

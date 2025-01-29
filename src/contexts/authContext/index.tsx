@@ -6,7 +6,8 @@ import { iAuthContextProviderProps, iAuthContextValues, iUserLogin, iUserRegiste
 import { axiosController } from "@/ultils/service.controller.js";
 
 
-const baseURL = 'http://localhost:3333';
+// const baseURL = 'http://localhost:3333';
+const baseURL = 'https://carlos-api-git-develop-hugommbritos-projects.vercel.app/';
 
 export const AuthContext = createContext({} as iAuthContextValues)
 
